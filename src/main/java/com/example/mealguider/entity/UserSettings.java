@@ -25,7 +25,7 @@ public class UserSettings {
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-    private String workoutRate;
+    private int workoutRate;
 
     @Enumerated(EnumType.STRING)
     private WeightGoal weightGoal;
