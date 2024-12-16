@@ -5,10 +5,7 @@ import com.example.mealguider.entity.UserSettings;
 import com.example.mealguider.service.UserSettingsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/userSettings")
@@ -17,8 +14,10 @@ public class UserSettingsController {
     private UserSettingsService userSettingsService;
 
     @PostMapping("/save")
-    public ResponseEntity<UserSettingsDTO> saveUserSettings(@RequestBody UserSettingsDTO userSettingsDTO) {
-        UserSettings userSettings = userSettingsService.saveUserSettings(userSettingsDTO);
+    public ResponseEntity<UserSettingsDTO> saveUserSettings(
+            @RequestParam String email,
+            @RequestBody UserSettingsDTO userSettingsDTO) {
+        UserSettings userSettings = userSettingsService.saveUserSettings(email, userSettingsDTO);
 
         return ResponseEntity.ok(new UserSettingsDTO(userSettings));
     }

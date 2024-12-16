@@ -18,26 +18,31 @@ public class UserSettingsService {
     @Autowired
     private UserRepository userRepository;
 
-    public UserSettings saveUserSettings(UserSettingsDTO userSettingsDTO) {
-        UserSettings userSettings = mapToEntity(userSettingsDTO);
+    public UserSettings saveUserSettings(String email, UserSettingsDTO userSettingsDTO) {
+        User user = userRepository.findByEmail(email);
+        if (user == null) {
+            throw new IllegalArgumentException("User not found with email: " + email);
+        }
+
+        // Fetch existing UserSettings for the user, if exists
+        UserSettings userSettings = user.getSettings();
+        if (userSettings == null) {
+            userSettings = new UserSettings();
+            userSettings.setUser(user);
+        }
+
+        userSettings.setAge(userSettingsDTO.age());
+        userSettings.setWeight(userSettingsDTO.weight());
+        userSettings.setHeight(userSettingsDTO.height());
+        userSettings.setGender(userSettingsDTO.gender() != null
+                ? Gender.valueOf(userSettingsDTO.gender().toUpperCase())
+                : null);
+        userSettings.setWorkoutRate(userSettingsDTO.workoutRate());
+        userSettings.setWeightGoal(userSettingsDTO.weightGoal() != null
+                ? WeightGoal.valueOf(userSettingsDTO.weightGoal().toUpperCase().replace(" ", "_"))
+                : null);
 
         return userSettingsRepository.save(userSettings);
     }
 
-    private UserSettings mapToEntity(UserSettingsDTO dto) {
-        User user = userRepository.findById(dto.user().getId())
-                .orElseThrow(() -> new IllegalArgumentException("User not found with ID: " + dto.user().getId()));
-
-        UserSettings userSettings = new UserSettings();
-        userSettings.setId(dto.id());
-        userSettings.setAge(dto.age());
-        userSettings.setWeight(dto.weight());
-        userSettings.setHeight(dto.height());
-        userSettings.setGender(dto.gender() != null ? Gender.valueOf(dto.gender()) : null);
-        userSettings.setWorkoutRate(dto.workoutRate());
-        userSettings.setWeightGoal(dto.weightGoal() != null ? WeightGoal.valueOf(dto.weightGoal()) : null);
-        userSettings.setUser(user);
-
-        return userSettings;
-    }
 }
