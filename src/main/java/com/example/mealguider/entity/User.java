@@ -18,6 +18,9 @@ public class User {
     @Column(nullable = false, unique = true)
     private String email;
 
+    @Column(nullable = false)
+    private String password;
+
     @ElementCollection
     @CollectionTable(name = "user_allergies", joinColumns = @JoinColumn(name = "user_id"))
     @Column(name = "allergy")
