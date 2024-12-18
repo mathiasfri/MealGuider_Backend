@@ -13,11 +13,18 @@ public class UserSettingsController {
     @Autowired
     private UserSettingsService userSettingsService;
 
-    @PostMapping("/save")
+    @GetMapping("/{id}")
+    public ResponseEntity<UserSettingsDTO> getUserSettingsByUserId(@PathVariable Long id) {
+        UserSettingsDTO userSettingsDTO = userSettingsService.getUserSettingsByUserId(id);
+
+        return ResponseEntity.ok(userSettingsDTO);
+    }
+
+    @PostMapping("/save/{id}")
     public ResponseEntity<UserSettingsDTO> saveUserSettings(
-            @RequestParam String email,
+            @PathVariable Long id,
             @RequestBody UserSettingsDTO userSettingsDTO) {
-        UserSettings userSettings = userSettingsService.saveUserSettings(email, userSettingsDTO);
+        UserSettings userSettings = userSettingsService.saveUserSettings(id, userSettingsDTO);
 
         return ResponseEntity.ok(new UserSettingsDTO(userSettings));
     }

@@ -18,11 +18,16 @@ public class UserSettingsService {
     @Autowired
     private UserRepository userRepository;
 
-    public UserSettings saveUserSettings(String email, UserSettingsDTO userSettingsDTO) {
-        User user = userRepository.findByEmail(email);
-        if (user == null) {
-            throw new IllegalArgumentException("User not found with email: " + email);
-        }
+    public UserSettingsDTO getUserSettingsByUserId(Long userId) {
+        UserSettings userSettings = userSettingsRepository.findByUserId(userId)
+                .orElseThrow(() -> new IllegalArgumentException("UserSettings not found for user with ID: " + userId));
+
+        return new UserSettingsDTO(userSettings);
+    }
+
+    public UserSettings saveUserSettings(Long id, UserSettingsDTO userSettingsDTO) {
+        User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("User not found"));
+
 
         // Fetch existing UserSettings for the user, if exists
         UserSettings userSettings = user.getSettings();

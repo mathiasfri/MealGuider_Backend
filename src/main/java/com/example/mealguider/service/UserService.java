@@ -1,5 +1,6 @@
 package com.example.mealguider.service;
 
+import com.example.mealguider.dto.AuthUserDTO;
 import com.example.mealguider.dto.UserDTO;
 import com.example.mealguider.entity.User;
 import com.example.mealguider.repository.UserRepository;
@@ -24,13 +25,13 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public boolean login(UserDTO userDTO) {
+    public AuthUserDTO login(UserDTO userDTO) {
         User user = userRepository.findByEmail(userDTO.email());
 
-        if (user == null) {
-            return false;
+        if (user == null || !PasswordCrypt.check(userDTO.password(), user.getPassword())) {
+            return null;
         }
 
-        return PasswordCrypt.check(userDTO.password(), user.getPassword());
+        return new AuthUserDTO(user);
     }
 }

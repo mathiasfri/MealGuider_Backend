@@ -1,5 +1,6 @@
 package com.example.mealguider.controller;
 
+import com.example.mealguider.dto.AuthUserDTO;
 import com.example.mealguider.dto.UserDTO;
 import com.example.mealguider.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,11 +28,11 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody UserDTO userDTO) {
-        if (userService.login(userDTO)) {
-            return ResponseEntity.ok("Login successful");
+    public ResponseEntity<AuthUserDTO> login(@RequestBody UserDTO userDTO) {
+        if (userService.login(userDTO).id() != null) {
+            return ResponseEntity.ok(userService.login(userDTO));
         } else {
-            return ResponseEntity.badRequest().body("Invalid email or password");
+            return ResponseEntity.badRequest().body(null);
         }
     }
 }
