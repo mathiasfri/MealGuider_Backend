@@ -21,11 +21,6 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    @ElementCollection
-    @CollectionTable(name = "user_allergies", joinColumns = @JoinColumn(name = "user_id"))
-    @Column(name = "allergy")
-    private List<String> allergies;
-
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private UserSettings settings;
 

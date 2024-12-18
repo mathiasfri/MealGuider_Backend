@@ -8,6 +8,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -29,6 +31,11 @@ public class UserSettings {
 
     @Enumerated(EnumType.STRING)
     private WeightGoal weightGoal;
+
+    @ElementCollection
+    @CollectionTable(name = "user_settings_allergies", joinColumns = @JoinColumn(name = "user_settings_id"))
+    @Column(name = "allergy")
+    private List<String> allergies;
 
     @OneToOne
     @JoinColumn(name = "user_id", nullable = false)

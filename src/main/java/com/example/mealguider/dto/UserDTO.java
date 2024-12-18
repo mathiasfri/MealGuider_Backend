@@ -10,7 +10,6 @@ public record UserDTO(
         Long id,
         String email,
         String password,
-        List<String> allergies,
         UserSettings settings,
         List<Recipe> recipes
 ) {
@@ -19,7 +18,6 @@ public record UserDTO(
                 user.getId(),
                 user.getEmail(),
                 user.getPassword(),
-                user.getAllergies(),
                 user.getSettings(),
                 user.getRecipes()
         );

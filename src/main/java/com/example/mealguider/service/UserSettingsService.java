@@ -41,6 +41,7 @@ public class UserSettingsService {
         userSettings.setWeightGoal(userSettingsDTO.weightGoal() != null
                 ? WeightGoal.valueOf(userSettingsDTO.weightGoal().toUpperCase().replace(" ", "_"))
                 : null);
+        userSettings.setAllergies(userSettingsDTO.allergies());
 
         return userSettingsRepository.save(userSettings);
     }
