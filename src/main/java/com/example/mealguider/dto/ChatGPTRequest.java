@@ -1,12 +1,29 @@
 package com.example.mealguider.dto;
 
-public class ChatGPTRequest {
-    private String prompt;
-    private String model = "gpt-4"; // Specify the GPT model to use
+import lombok.Getter;
+import lombok.Setter;
 
-    public ChatGPTRequest(String prompt) {
-        this.prompt = prompt;
+import java.util.List;
+
+@Getter
+@Setter
+public class ChatGPTRequest {
+    private String model = "gpt-4";
+    private List<Message> messages;
+
+    public ChatGPTRequest(List<Message> messages) {
+        this.messages = messages;
     }
 
-    // Getters and setters
+    @Getter
+    @Setter
+    public static class Message {
+        private String role;
+        private String content;
+
+        public Message(String role, String content) {
+            this.role = role;
+            this.content = content;
+        }
+    }
 }

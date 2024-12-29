@@ -1,28 +1,26 @@
 package com.example.mealguider.dto;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.List;
 
+@Setter
+@Getter
 public class ChatGPTResponse {
 
     private List<Choice> choices;
 
-    public List<Choice> getChoices() {
-        return choices;
-    }
-
-    public void setChoices(List<Choice> choices) {
-        this.choices = choices;
-    }
-
+    @Setter
+    @Getter
     public static class Choice {
-        private String text;
+        private Message message;
+    }
 
-        public String getText() {
-            return text;
-        }
-
-        public void setText(String text) {
-            this.text = text;
-        }
+    @Getter
+    @Setter
+    public static class Message {
+        private String role;
+        private String content;
     }
 }

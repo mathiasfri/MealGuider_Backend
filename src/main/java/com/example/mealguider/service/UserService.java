@@ -2,11 +2,14 @@ package com.example.mealguider.service;
 
 import com.example.mealguider.dto.AuthUserDTO;
 import com.example.mealguider.dto.UserDTO;
+import com.example.mealguider.entity.Recipe;
 import com.example.mealguider.entity.User;
 import com.example.mealguider.repository.UserRepository;
 import com.example.mealguider.security.PasswordCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class UserService {
