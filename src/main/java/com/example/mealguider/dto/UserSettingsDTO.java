@@ -1,6 +1,5 @@
 package com.example.mealguider.dto;
 
-import com.example.mealguider.entity.User;
 import com.example.mealguider.entity.UserSettings;
 
 import java.util.List;
@@ -14,7 +13,7 @@ public record UserSettingsDTO(
         int workoutRate,
         String weightGoal,
         List<String> allergies,
-        User user
+        Long userId
 ) {
     public UserSettingsDTO(UserSettings userSettings) {
         this(
@@ -26,7 +25,7 @@ public record UserSettingsDTO(
                 userSettings.getWorkoutRate(),
                 userSettings.getWeightGoal().name(),
                 userSettings.getAllergies(),
-                userSettings.getUser()
+                userSettings.getUser().getId()
         );
     }
 }

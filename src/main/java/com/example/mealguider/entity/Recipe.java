@@ -20,7 +20,10 @@ public class Recipe {
     @Column(nullable = false, unique = true)
     private String name;
 
+    @Lob
     private String description;
+
+    @Lob
     private String instructions;
 
     @Enumerated(EnumType.STRING)
