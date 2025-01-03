@@ -2,6 +2,7 @@ package com.example.mealguider.entity;
 
 import com.example.mealguider.entity.enums.Gender;
 import com.example.mealguider.entity.enums.WeightGoal;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -40,6 +41,6 @@ public class UserSettings {
 
     @OneToOne
     @JoinColumn(name = "user_id", nullable = false)
-    @JsonIgnore
+    @JsonBackReference
     private User user;
 }

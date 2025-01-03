@@ -68,4 +68,11 @@ public class RecipeService {
                 .map(RecipeDTO::new)
                 .toList();
     }
+
+    public void deleteRecipe(Long id) {
+        if (!recipeRepository.existsById(id)) {
+            throw new IllegalArgumentException("Recipe not found");
+        }
+        recipeRepository.deleteById(id);
+    }
 }

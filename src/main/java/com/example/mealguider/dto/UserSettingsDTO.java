@@ -21,9 +21,9 @@ public record UserSettingsDTO(
                 userSettings.getAge(),
                 userSettings.getWeight(),
                 userSettings.getHeight(),
-                userSettings.getGender().name(),
+                userSettings.getGender().getDisplayName(),
                 userSettings.getWorkoutRate(),
-                userSettings.getWeightGoal().name(),
+                userSettings.getWeightGoal().getDisplayName(),
                 userSettings.getAllergies(),
                 userSettings.getUser().getId()
         );
