@@ -75,4 +75,9 @@ public class RecipeService {
         }
         recipeRepository.deleteById(id);
     }
+
+    public Recipe getRecipeById(Long id) {
+        return recipeRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Recipe not found"));
+    }
 }
