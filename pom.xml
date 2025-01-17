@@ -110,5 +110,17 @@
             </plugin>
         </plugins>
     </build>
+    <profiles>
+        <profile>
+            <id>build</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <!-- Activate build-specific properties -->
+                <spring.profiles.active>build</spring.profiles.active>
+            </properties>
+        </profile>
+    </profiles>
 
 </project>
