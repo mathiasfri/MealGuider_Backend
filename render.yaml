@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: mealguider-backend
+    runtime: java
+    buildCommand: ./mvnw clean package -DskipTests
+    startCommand: java -jar target/mealguider-0.0.1-SNAPSHOT.jar
+    envVars:
+      - key: JDBC_DATABASE_URL
+        sync: false
+      - key: JDBC_USERNAME
+        sync: false
+      - key: JDBC_PASSWORD
+        sync: false
+      - key: CHATGPT_API_KEY
+        sync: false
+      - key: PORT
+        value: 8080
